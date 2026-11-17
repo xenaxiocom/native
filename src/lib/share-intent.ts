@@ -34,7 +34,7 @@ export function addShareListener(listener: (payload: SharePayload) => void): () 
 // The app's package names, the GitHub and the Play flavour. A provider of
 // either belongs to the app, whichever build is running. Keep in sync with
 // OWN_PACKAGES in ShareIntentStore.kt.
-const OWN_PACKAGES = ['com.anonymous.bulwarkmobile', 'org.bulwarkmail.mobile'];
+const OWN_PACKAGES = ['com.xenaxio.pilot', 'com.xenaxio.app'];
 
 /**
  * Whether a file another app shares into this one may be attached: a

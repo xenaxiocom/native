@@ -1,6 +1,6 @@
 # Message actions with undo: move to a folder, delete to Trash, select and
 # star from the list.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Move, delete, select
 tags:
   - features

@@ -5,7 +5,7 @@
 # simulator once kept only that one ("7" of six), so type it alone, let the
 # form settle, then the rest. The code then shows as the field's text; if it
 # doesn't, erase (the cursor is at the end) and type it again.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 - extendedWaitUntil:
     visible: "Authentication code"

@@ -4,7 +4,7 @@
 //   the notification service extension (the app's own group stays first, so
 //   items saved before keep their group).
 // - A Notification Service Extension target ("NotificationService",
-//   org.bulwarkmail.mobile.NotificationService). The relay's push carries
+//   com.xenaxio.app.NotificationService). The relay's push carries
 //   only ids; the extension fetches sender and subject over JMAP on the device
 //   before iOS shows the notification. Its sources live next to this file and
 //   are copied into ios/ at prebuild, like everything else in ios/.
@@ -42,7 +42,7 @@ const SOURCE_FILES = ['NotificationService.swift', 'SharedKeychain.swift', 'Jmap
 // background refresh task.
 const APP_SOURCE_FILES = ['SharedKeychain.swift', 'Jmap.swift', 'PushRenewal.swift', 'PushRenewalTask.swift'];
 // PushRenewalTask.identifier
-const RENEWAL_TASK_ID = 'org.bulwarkmail.mobile.push-renewal';
+const RENEWAL_TASK_ID = 'com.xenaxio.app.push-renewal';
 const RENEWAL_REGISTER_CALL = 'PushRenewalTask.register()';
 // Where Expo's AppDelegate.swift hands launch to its superclass; the
 // registration has to run before that returns (Expo's Maps plugin uses the
@@ -50,7 +50,7 @@ const RENEWAL_REGISTER_CALL = 'PushRenewalTask.register()';
 const APP_DELEGATE_LAUNCH = /^([ \t]*)return super\.application\(\w+, didFinishLaunchingWithOptions: \w+\)/m;
 
 function sharedGroupSuffix() {
-  return 'org.bulwarkmail.shared';
+  return 'com.xenaxio.shared';
 }
 
 function withAppEntitlements(config, { apsEnvironment }) {

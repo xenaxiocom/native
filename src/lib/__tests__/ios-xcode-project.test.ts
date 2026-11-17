@@ -69,7 +69,7 @@ function appConfig(projectRoot: string) {
     name: 'Bulwark Mobile',
     slug: 'bulwark-mobile',
     version: '1.0.0',
-    ios: { bundleIdentifier: 'org.bulwarkmail.mobile', buildNumber: '1' },
+    ios: { bundleIdentifier: 'com.xenaxio.app', buildNumber: '1' },
   };
   return withPlugins(config, [
     [req('./plugins/ios-push'), { apsEnvironment: 'production', teamId: 'TEAMID' }],

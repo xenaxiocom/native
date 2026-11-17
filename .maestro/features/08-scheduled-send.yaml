@@ -1,6 +1,6 @@
 # Scheduled send: schedule a message for later, find it under Scheduled,
 # cancel it.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Scheduled send
 tags:
   - features

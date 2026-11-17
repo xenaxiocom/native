@@ -142,6 +142,6 @@ export async function openInstallUnknownAppsSettings(): Promise<void> {
   if (Platform.OS !== 'android') return;
   await IntentLauncher.startActivityAsync(
     'android.settings.MANAGE_UNKNOWN_APP_SOURCES',
-    { data: 'package:com.anonymous.bulwarkmobile' },
+    { data: 'package:com.xenaxio.pilot' },
   );
 }

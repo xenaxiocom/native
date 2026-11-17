@@ -11,7 +11,7 @@ waited for their own project (org policy, PGP and S/MIME, offline Outbox,
 iOS widget and client certificates, global search, folder sharing, dark mode
 recolouring, Jalali, free/busy) and translated every app string into the 28
 languages besides English. CI (full vitest suite) is green at 63357420:
-https://github.com/bulwarkmail/native/actions/runs/41226998363
+https://github.com/xenaxiocom/native/actions/runs/41226998363
 
 Left: the results of the last full iOS e2e run and of the emulator recheck
 (RESULT PENDING below), some policy and accessibility pieces (see Open), and
@@ -379,7 +379,7 @@ The app explains this, and it goes to Stalwart (decision 18).
   unencrypted on the server, as in the webmail.
 - iOS: the Swift for client certificates, push renewal and the widget
   compiled in CI but never ran on a device; reading fonts on iOS are
-  untested. The widget needs the App ID org.bulwarkmail.mobile.Widget and the
+  untested. The widget needs the App ID com.xenaxio.app.Widget and the
   secret IOS_WIDGET_PROVISIONING_PROFILE_BASE64 in release-ios.yml; until
   then signed releases leave it out. The iOS minimum is now 16.4
   (quick-crypto and Nitro).
@@ -445,7 +445,7 @@ The app explains this, and it goes to Stalwart (decision 18).
 4. Push the webmail commits (fb3ba0275, f74ff49f5, 3bdbdb136) and the
    website commit (7292593)? The app's hand-off code and policy need the
    webmail ones on the server.
-5. iOS widget: create the App ID org.bulwarkmail.mobile.Widget and add the
+5. iOS widget: create the App ID com.xenaxio.app.Widget and add the
    IOS_WIDGET_PROVISIONING_PROFILE_BASE64 secret?
 6. Export compliance: with usesNonExemptEncryption true, App Store Connect
    asks for documentation on the next upload. Who files it?

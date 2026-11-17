@@ -208,7 +208,7 @@ side by side as separate apps:
 | Flavor | Package | Output | Updated by | Firebase project |
 |---|---|---|---|---|
 | `github` | `com.anonymous.bulwarkmobile` | APK on GitHub Releases | in-app updater | `bulwark-mobile` (`src/github/google-services.json`) |
-| `play` | `org.bulwarkmail.mobile` | AAB for Google Play | Google Play | `bulwark-20c72` (`google-services.json`) |
+| `play` | `com.xenaxio.app` | AAB for Google Play | Google Play | `bulwark-20c72` (`google-services.json`) |
 
 Play forbids an app updating itself outside Play, so the `play` flavor has no
 `REQUEST_INSTALL_PACKAGES` (only `src/github/AndroidManifest.xml` declares it)

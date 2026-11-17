@@ -9,7 +9,7 @@ import org.junit.Test
 // file shared into the app is accepted only from another app's provider.
 class ShareIntentStoreTest {
     private val pkg = "com.anonymous.bulwarkmobile"
-    private val playPkg = "org.bulwarkmail.mobile"
+    private val playPkg = "com.xenaxio.app"
 
     private fun accepted(uris: List<String>) = uris.filter { ShareIntentStore.isForeignContentUri(it) }
 

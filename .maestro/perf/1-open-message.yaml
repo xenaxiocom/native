@@ -1,6 +1,6 @@
 # Perf: open a message and go back, five times. The app is already running
 # with -perfMarks YES (no launchApp here: it would drop the launch argument).
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Perf open message
 ---
 - extendedWaitUntil:

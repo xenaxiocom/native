@@ -47,14 +47,14 @@ export const DEFAULT_CLIENT_ID = 'bulwark-webmail';
  * back); the browser sign-in comes back on it, so the app registers the
  * scheme too.
  */
-export const REGISTERED_REDIRECT_URI = 'org.bulwarkmail.mobile:/auth/callback';
+export const REGISTERED_REDIRECT_URI = 'com.xenaxio.app:/auth/callback';
 
 /**
  * Where the identity provider sends the browser back after sign-out ended
  * its session (OIDC RP-Initiated Logout), registered with the client the app
  * registers. Same scheme as the sign-in redirect, which the app handles.
  */
-export const REGISTERED_LOGOUT_REDIRECT_URI = 'org.bulwarkmail.mobile:/auth/logout';
+export const REGISTERED_LOGOUT_REDIRECT_URI = 'com.xenaxio.app:/auth/logout';
 
 /**
  * The app's own client, which the webmail's admin OAuth setup registers on

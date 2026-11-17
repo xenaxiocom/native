@@ -1,6 +1,6 @@
 # Files: open a folder, preview a text and a PDF file, create and delete a
 # folder.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Files
 tags:
   - features

@@ -390,7 +390,7 @@ Stalwart, not the webmail:
   the cipher picker; a save is retried as `Enabled`.
 - iOS: client certificates in the notification extension (#3) wait for a
   device; the Swift from the last run and the widget still never ran on a
-  device. The widget needs the App ID org.bulwarkmail.mobile.Widget, its
+  device. The widget needs the App ID com.xenaxio.app.Widget, its
   profile and the IOS_WIDGET_PROVISIONING_PROFILE_BASE64 secret
   (docs/ios-release.md step 6).
 - PR #101 stays with its author until the relay change is deployed.
@@ -1091,7 +1091,7 @@ sense", so the recommendations stand):
    nothing to do.
 5. iOS widget: release-ios.yml uses IOS_WIDGET_PROVISIONING_PROFILE_BASE64
    when it exists and leaves the widget out when it doesn't. The App ID
-   org.bulwarkmail.mobile.Widget, its profile and the secret are for Linus.
+   com.xenaxio.app.Widget, its profile and the secret are for Linus.
 6. Export compliance: 37b93729 stays; the branch is based on it.
 7. PR #106: merged as is (64c61e53), the author's commit kept.
 8. PR #103: merged with the author's commits (f712f015); on top: a test
