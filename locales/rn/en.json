@@ -1000,6 +1000,10 @@
       "use_password": "Sign in with a password instead",
       "username_label": "Email or username",
       "your_server": "your server"
+    },
+    "xenaxio": {
+      "title": "Sign in with Xenaxio",
+      "desc": "With your company email, as on the web"
     }
   },
   "notifications": {

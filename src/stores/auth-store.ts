@@ -1,4 +1,5 @@
 import { forgetCachedIdentities } from '../lib/identity-cache';
+import { isXenaxioServerUrl, signInWithXenaxio, signOutOfXenaxio, XenaxioSignInCancelledError } from '../xenaxio/platform-sign-in';
 import { clearRescuedDrafts } from '../lib/compose-rescue';
 import { create } from 'zustand';
 import {
@@ -123,6 +124,8 @@ export interface AuthState {
   ) => Promise<void>;
   /** Access-token (Bearer) sign-in with a token the user pasted, e.g. a Fastmail API token. */
   loginWithToken: (serverUrl: string, token: string, opts?: SignInOptions) => Promise<void>;
+  /** xenaxio (step 151 A): sign-in through the Xenaxio platform, in the phone's browser. */
+  loginViaXenaxio: (address: string, opts?: SignInOptions) => Promise<void>;
   loginViaWebmail: (webmailUrl: string, opts?: SignInOptions) => Promise<void>;
   /** OAuth/OIDC (PKCE) straight against the mail server's authorization server. */
   loginViaOAuth: (serverUrl: string, opts?: SignInOptions) => Promise<void>;
@@ -576,6 +579,13 @@ function refuseAddWhenFull(set: (partial: Partial<AuthState>) => void, opts?: Si
 async function revokeStoredRefreshToken(accountId: string): Promise<void> {
   try {
     const entry = useAccountStore.getState().getAccountById(accountId);
+    // xenaxio (step 151 A): a Xenaxio account signs this phone out at the platform, which
+    // also ends the phone's own access to the mailbox.
+    if (entry && isXenaxioServerUrl(entry.serverUrl)) {
+      const token = (await jmapClient.getStoredCredentials(accountId))?.accessToken;
+      if (token) await signOutOfXenaxio(entry.serverUrl, token);
+      return;
+    }
     const tokens = await jmapClient.getStoredOAuthTokens(accountId);
     forgetRefreshRotations(tokens?.refreshToken);
     if (!entry || !tokens || tokens.source === 'pairing') return;
@@ -800,6 +810,25 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ isLoading: false, error: isSignInCancelled(err) ? null : err instanceof Error ? err.message : 'Connection failed' });
       throw err;
     }
+  },
+
+  // xenaxio (step 151 A): through the Xenaxio platform (src/xenaxio/platform-sign-in.ts).
+  loginViaXenaxio: async (address, opts) => {
+    set({ isLoading: true, error: null });
+    refuseAddWhenFull(set, opts);
+    let result;
+    try {
+      result = await signInWithXenaxio(address, { addAccount: opts?.addAccount });
+      cancelledSignIn(set, opts);
+    } catch (err) {
+      if (err instanceof XenaxioSignInCancelledError) {
+        set({ isLoading: false });
+        return;
+      }
+      set({ isLoading: false, error: err instanceof Error ? err.message : 'Sign-in failed' });
+      throw err;
+    }
+    await get().loginWithToken(result.serverUrl, result.token, opts);
   },
 
   loginViaWebmail: async (webmailUrl, opts) => {

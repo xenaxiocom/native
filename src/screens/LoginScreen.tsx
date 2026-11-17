@@ -1,4 +1,5 @@
 import React from 'react';
+import { XENAXIO_DEFAULT_ADDRESS } from '../xenaxio/platform-sign-in';
 import { Alert, BackHandler } from 'react-native';
 import { useAuthStore } from '../stores/auth-store';
 import { useAccountStore } from '../stores/account-store';
@@ -336,6 +337,25 @@ export default function LoginScreen({ onLogin, isAddMode = false, onCancel }: Lo
     },
     [step, t],
   );
+
+  // xenaxio (step 151 A): through the Xenaxio platform, in the phone's browser.
+  const loginViaXenaxio = useAuthStore((st) => st.loginViaXenaxio);
+  const runXenaxio = React.useCallback(async () => {
+    setNotice(null);
+    const attempt = beginAttempt();
+    setBusy('browser');
+    const wasAuthenticated = useAuthStore.getState().isAuthenticated;
+    try {
+      await loginViaXenaxio(XENAXIO_DEFAULT_ADDRESS, { addAccount: isAddMode, signal: attempt.signal });
+      if (!isLive(attempt)) return;
+      finishIfSignedIn(wasAuthenticated);
+    } catch (err) {
+      if (!isLive(attempt) || isSignInCancelled(err)) return;
+      setNotice(describeLoginError(err, { serverUrl: XENAXIO_DEFAULT_ADDRESS, t }));
+    } finally {
+      if (endAttempt(attempt)) setBusy(null);
+    }
+  }, [beginAttempt, endAttempt, finishIfSignedIn, isAddMode, loginViaXenaxio, t]);
 
   const runHandoff = React.useCallback(
     async (target: string) => {
@@ -677,6 +697,7 @@ export default function LoginScreen({ onLogin, isAddMode = false, onCancel }: Lo
             accounts={accounts}
             knownServerUrls={isAddMode ? addServerUrls : []}
             notice={chooseNotice}
+            onXenaxio={() => void runXenaxio()}
             onScan={() => setScannerVisible(true)}
             onPaste={() => setPasteVisible(true)}
             onUseEmail={() => goTo('email')}

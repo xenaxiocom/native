@@ -793,6 +793,10 @@
       "server_cert_clear": "Ohne Zertifikat anmelden",
       "server_cert_failed": "Zertifikat konnte nicht ausgewählt werden",
       "server_cert_hint": "Verlangt Ihr Server ein Client-Zertifikat? Wählen Sie eines, das auf diesem Gerät installiert ist."
+    },
+    "xenaxio": {
+      "title": "Mit Xenaxio anmelden",
+      "desc": "Mit Ihrer Firmen-E-Mail, wie im Web"
     }
   },
   "notifications": {
