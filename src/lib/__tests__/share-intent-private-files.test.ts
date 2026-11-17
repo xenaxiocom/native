@@ -16,8 +16,8 @@ import { isForeignContentUri, shareAttachments } from '../share-intent';
 import { shareToDeepLink } from '../../navigation/linking';
 import { copyPreviewFile, isComposeAttachmentUri } from '../email-export';
 
-const PKG = 'com.anonymous.bulwarkmobile';
-const PLAY_PKG = 'org.bulwarkmail.mobile';
+const PKG = 'com.xenaxio.pilot';
+const PLAY_PKG = 'com.xenaxio.app';
 
 function shared(uris: string[]) {
   return shareAttachments({
@@ -69,7 +69,7 @@ describe('files shared into the app', () => {
       'https://example.org/a.pdf',
       'data:text/plain;base64,QQ==',
       'javascript:alert(1)',
-      '/data/user/0/com.anonymous.bulwarkmobile/databases/RKStorage',
+      '/data/user/0/com.xenaxio.pilot/databases/RKStorage',
       '',
       `content:${PKG}.FileSystemFileProvider/x`,
       'content:///x',
@@ -99,7 +99,7 @@ describe('files shared into the app', () => {
       { uri: 'content://0@com.google.android.apps.photos.contentprovider/1/2/x', name: 'photo.jpg', type: 'image/jpeg', size: 6000 },
     ]);
     // A package whose name only starts like the app's is another app.
-    expect(isForeignContentUri('content://com.anonymous.bulwarkmobilex.files/x')).toBe(true);
+    expect(isForeignContentUri('content://com.xenaxio.pilotx.files/x')).toBe(true);
   });
 
   it('keeps the foreign file of a multiple share and drops the own one', () => {

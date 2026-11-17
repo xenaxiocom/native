@@ -1,3 +1,19 @@
+# Xenaxio for iPhone and Android
+
+This repository is Xenaxio's fork of [Bulwark Mobile](https://github.com/bulwarkmail/native) (AGPL-3.0-only with the app store permission, see LICENSE). It becomes the Xenaxio app: mail, calendar, contacts and files first, then Rooms (from `@xenaxio/rooms-native`, built in `xenaxiocom/xenrooms-mobile`), the assistant and projects. The plan is in the Xenaxio platform repository (`docs/plan.md`, step 151).
+
+What differs from Bulwark so far (part 0):
+
+- **Name and ids.** "Xenaxio", iOS bundle `com.xenaxio.app` (shared keychain `com.xenaxio.shared`), Android `com.xenaxio.app` (Play) and `com.xenaxio.pilot` (the pilot APK on GitHub Releases, which updates itself from `xenaxiocom/native`). The Android Kotlin namespace stays Bulwark's, so its sources don't move.
+- **Text.** Bulwark's strings say "Xenaxio" when a catalog loads (`src/xenaxio/brand.ts`); the locale files stay as upstream has them.
+- **Icons, splash, notification icon and logos** from the Xenaxio mark: `node scripts/xenaxio-icons.mjs --webmail <webmail checkout>`.
+- **No Bulwark relay.** Push goes through the Xenaxio platform (part B); no outside server sees our people's devices.
+- **Source link** (Settings → About, AGPL §13): `github.com/xenaxiocom/native`.
+
+Coming: sign-in through the Xenaxio platform with a device token, mail and the rest through the platform's `/api` only (part A); push from the platform (part B); Rooms (part C). Xenaxio code goes into `src/xenaxio/`; changes to Bulwark's files stay small and marked `xenaxio:`, so upstream merges stay easy.
+
+---
+
 <div align="center">
 
 <picture>
@@ -17,7 +33,7 @@ React Native (Expo SDK 54) client for [Bulwark Webmail](https://github.com/bulwa
 ## Try it
 
 - **iPhone and iPad:** join the beta on TestFlight: https://testflight.apple.com/join/rumcjNSp. A new release shows up there once Apple has reviewed it, usually within a day.
-- **Android:** download the APK from the [latest release](https://github.com/bulwarkmail/native/releases/latest).
+- **Android:** download the APK from the [latest release](https://github.com/xenaxiocom/native/releases/latest).
 
 ## What works today
 

@@ -51,7 +51,7 @@ vi.mock('expo-file-system', () => {
       this.parent = dir;
       this.name = name;
       this.uri = `${dir.uri}${name}`;
-      this.contentUri = `content://org.bulwarkmail.mobile.FileSystemFileProvider/${name}`;
+      this.contentUri = `content://com.xenaxio.app.FileSystemFileProvider/${name}`;
     }
     get parentDirectory() { return this.parent; }
     create() {}
@@ -138,7 +138,7 @@ describe('shareAttachment (preview)', () => {
     await shareAttachment('blob-1', 'report.pdf', 'application/pdf');
 
     expect(IntentLauncher.startActivityAsync).toHaveBeenCalledWith(VIEW, {
-      data: 'content://org.bulwarkmail.mobile.FileSystemFileProvider/report.pdf',
+      data: 'content://com.xenaxio.app.FileSystemFileProvider/report.pdf',
       type: 'application/pdf',
       flags: FLAG_GRANT_READ_URI_PERMISSION,
     });

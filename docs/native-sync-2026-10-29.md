@@ -25,7 +25,7 @@ narrowing plus main's device-sync types and mutes.
 
 - Sign-in: password + TOTP on 1.0 (96ef8515: one `/api/auth` body for both
   versions, RFC 7591 public client registered per server, redirect
-  `org.bulwarkmail.mobile:/auth/callback` because 1.0 wants a dot in the
+  `com.xenaxio.app:/auth/callback` because 1.0 wants a dot in the
   scheme); browser sign-in with the registered client and Stalwart's data
   scopes (6ffd0473, a2caa4cc); refresh-token rotation (1456e15d, 28d928f6,
   cfd81737); no secret follows a redirect to another host (2c05e7bd,

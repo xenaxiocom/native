@@ -7,7 +7,7 @@
 # never opened. So the keyboard is closed and the search emptied before the
 # scroll and the tap, and the whole step runs once more when the dialog
 # doesn't show.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 - tapOn:
     id: tab-settings

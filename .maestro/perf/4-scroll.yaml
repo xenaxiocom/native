@@ -1,5 +1,5 @@
 # Perf: fling through the long inbox (thousands of messages), then back up.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Perf list scroll
 ---
 - tapOn:

@@ -1,5 +1,5 @@
 # Open folder FOLDER from the drawer or docked sidebar.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 - runFlow: open-drawer.yaml
 # A folder row's label joins its texts: "<name>, <unread>, /, <total>".

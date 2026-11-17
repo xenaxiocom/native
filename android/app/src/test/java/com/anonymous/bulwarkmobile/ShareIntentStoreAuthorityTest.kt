@@ -12,7 +12,7 @@ import org.junit.Test
 // src/lib/__tests__/share-intent-authority.test.ts.
 class ShareIntentStoreAuthorityTest {
     private val pkg = "com.anonymous.bulwarkmobile"
-    private val playPkg = "org.bulwarkmail.mobile"
+    private val playPkg = "com.xenaxio.app"
 
     @Test
     fun `refuses an own provider followed by a backslash, which Android reads as the end of the authority`() {

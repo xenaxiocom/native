@@ -7,7 +7,7 @@
 # autocomplete on the username field. Taps go by whole texts, which the
 # passkey button never matches, and "Sign in" is the one under the Password
 # label, not the page title.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 - extendedWaitUntil:
     visible: "you@example.com"

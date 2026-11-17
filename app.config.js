@@ -31,14 +31,16 @@ const APS_ENVIRONMENT = process.env.APS_ENVIRONMENT === 'development' ? 'develop
 
 module.exports = {
   expo: {
-    name: 'Bulwark Mobile',
-    slug: 'bulwark-mobile',
+    // xenaxio: Xenaxio's app, a fork of Bulwark Mobile (README).
+    name: 'Xenaxio',
+    slug: 'xenaxio',
     // mailto: lets Android/iOS offer the app for mail links in other apps;
     // bulwarkmail: is the webmail's sign-in link (bulwarkmail://pair?...).
-    // org.bulwarkmail.mobile: is where Stalwart 1.0 sends the browser sign-in
+    // com.xenaxio.app: is where Stalwart 1.0 sends the browser sign-in
     // back: it registers public clients only with a scheme that has a dot.
     // Android's manifest is maintained by hand and lists the same schemes.
-    scheme: ['bulwarkmobile', 'bulwarkmail', 'mailto', 'org.bulwarkmail.mobile'],
+    // xenaxio: xenaxio: is Xenaxio's own (sign-in through the platform, step 151 part A).
+    scheme: ['xenaxio', 'bulwarkmobile', 'bulwarkmail', 'mailto', 'com.xenaxio.app'],
     version: VERSION,
     orientation: 'default',
     icon: './assets/icon.png',
@@ -55,7 +57,7 @@ module.exports = {
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'org.bulwarkmail.mobile',
+      bundleIdentifier: 'com.xenaxio.app',
       buildNumber: IOS_BUILD_NUMBER,
       config: {
         // Apple's ITSAppUsesNonExemptEncryption is NO when the encryption is
@@ -72,11 +74,11 @@ module.exports = {
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
-        backgroundColor: '#db2d54',
+        backgroundColor: '#050b1a',
       },
       edgeToEdgeEnabled: true,
       predictiveBackGestureEnabled: false,
-      package: 'com.anonymous.bulwarkmobile',
+      package: 'com.xenaxio.app',
       // The AsyncStorage database holds cached message bodies, the outbox and
       // the account registry; the platform backup would ship all of it to the
       // user's Google account. Credentials live in SecureStore (excluded by
@@ -98,7 +100,7 @@ module.exports = {
         'expo-camera',
         {
           cameraPermission:
-            'Bulwark Mail uses the camera to scan sign-in QR codes shown in webmail.',
+            'Xenaxio uses the camera to scan sign-in QR codes shown in Xenaxio on the web.',
           // QR scanning never records audio; leaving the mic entry in would be
           // an unexplained permission in App Review.
           microphonePermission: false,
@@ -108,7 +110,7 @@ module.exports = {
         'expo-image-picker',
         {
           photosPermission:
-            'Bulwark Mail needs access to your photos so you can attach them to emails and set contact photos.',
+            'Xenaxio needs access to your photos so you can attach them to emails and chats and set contact photos.',
           // Only launchImageLibraryAsync is used - no in-app capture.
           cameraPermission: false,
           microphonePermission: false,
@@ -156,10 +158,10 @@ module.exports = {
       commit: COMMIT,
       // Settings → About → Source code. A modified build sets SOURCE_CODE_URL
       // to where its own source is (AGPL §13); the default is upstream.
-      sourceCodeUrl: process.env.SOURCE_CODE_URL || 'https://github.com/bulwarkmail/native',
+      sourceCodeUrl: process.env.SOURCE_CODE_URL || 'https://github.com/xenaxiocom/native',
       // src/lib/ios-push-shared.ts
-      iosSharedKeychainGroup: `${APPLE_TEAM_ID}.org.bulwarkmail.shared`,
-      iosAppKeychainGroup: `${APPLE_TEAM_ID}.org.bulwarkmail.mobile`,
+      iosSharedKeychainGroup: `${APPLE_TEAM_ID}.com.xenaxio.shared`,
+      iosAppKeychainGroup: `${APPLE_TEAM_ID}.com.xenaxio.app`,
       apnsEnvironment: APS_ENVIRONMENT === 'development' ? 'sandbox' : 'production',
     },
   },

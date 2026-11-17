@@ -1,6 +1,6 @@
 # Swipe actions with undo: swipe left archives (undo brings it back), swipe
 # right toggles read.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Swipe actions and undo
 tags:
   - features

@@ -72,7 +72,7 @@ jobs:
             if [ -z "$NSE_PROFILE" ]; then
               # The notification service extension (plugins/ios-push) is its
               # own App ID and needs its own App Store profile.
-              echo "::error::IOS_NSE_PROVISIONING_PROFILE_BASE64 is not set: the notification extension (org.bulwarkmail.mobile.NotificationService) can't be signed."
+              echo "::error::IOS_NSE_PROVISIONING_PROFILE_BASE64 is not set: the notification extension (com.xenaxio.app.NotificationService) can't be signed."
               exit 1
             fi
             echo "signed=true" >> "$GITHUB_OUTPUT"
@@ -103,7 +103,7 @@ jobs:
           if [ -n "$WIDGET_PROFILE_BASE64" ]; then
             SIDES="$SIDES widget"
           else
-            echo "::notice::IOS_WIDGET_PROVISIONING_PROFILE_BASE64 is not set: building without the iOS widget (org.bulwarkmail.mobile.Widget)."
+            echo "::notice::IOS_WIDGET_PROVISIONING_PROFILE_BASE64 is not set: building without the iOS widget (com.xenaxio.app.Widget)."
           fi
           for side in $SIDES; do
             case "$side" in
@@ -292,7 +292,7 @@ jobs:
 
           VERSION=$(cat VERSION | tr -d '[:space:]')
           SRC=$(ls "$RUNNER_TEMP"/export/*.ipa | head -1)
-          DEST="bulwark-mobile-${VERSION}-${GITHUB_SHA::7}.ipa"
+          DEST="xenaxio-${VERSION}-${GITHUB_SHA::7}.ipa"
           cp "$SRC" "$DEST"
           echo "path=$DEST" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"

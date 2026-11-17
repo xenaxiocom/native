@@ -41,7 +41,7 @@ describe('fetchLatestRelease', () => {
   const release = (overrides: Record<string, unknown> = {}) => ({
     tag_name: '1.2.3',
     name: 'v1.2.3',
-    html_url: 'https://github.com/bulwarkmail/native/releases/tag/1.2.3',
+    html_url: 'https://github.com/xenaxiocom/native/releases/tag/1.2.3',
     published_at: '2026-01-01T00:00:00Z',
     body: '',
     assets: [

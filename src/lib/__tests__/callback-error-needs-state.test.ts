@@ -51,10 +51,10 @@ describe('forged sign-in callback', () => {
   it('browser sign-in: the same with a guessed state', async () => {
     vi.mocked(WebBrowser.openAuthSessionAsync).mockResolvedValue({
       type: 'success',
-      url: `org.bulwarkmail.mobile:/auth/callback?state=00000000000000000000000000000000&error=${encodeURIComponent(LURE)}`,
+      url: `com.xenaxio.app:/auth/callback?state=00000000000000000000000000000000&error=${encodeURIComponent(LURE)}`,
     } as never);
     const err = await loginWithPkce('https://mail.example.com', meta as never, {
-      clientId: 'bulwark-mobile', redirectUri: 'org.bulwarkmail.mobile:/auth/callback',
+      clientId: 'bulwark-mobile', redirectUri: 'com.xenaxio.app:/auth/callback',
     }).catch((e) => e);
     expect(String(err.message)).not.toContain('evil.example');
   });
@@ -119,9 +119,9 @@ describe('callback errors of the sign-in the app started', () => {
   });
 
   it('takes the error on the second redirect scheme with the state', async () => {
-    answer((state) => `org.bulwarkmail.mobile:/auth/callback?state=${state}&error=access_denied&error_description=The+user+said+no`);
+    answer((state) => `com.xenaxio.app:/auth/callback?state=${state}&error=access_denied&error_description=The+user+said+no`);
     const err = await loginWithPkce('https://mail.example.com', meta as never, {
-      clientId: 'bulwark-mobile', redirectUri: 'org.bulwarkmail.mobile:/auth/callback',
+      clientId: 'bulwark-mobile', redirectUri: 'com.xenaxio.app:/auth/callback',
     }).catch((e) => e);
     expect(err.message).toBe('The user said no');
   });
