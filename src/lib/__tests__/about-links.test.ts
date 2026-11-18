@@ -33,9 +33,9 @@ describe('about links', () => {
   });
 
   it('sends iPhone users to TestFlight, not to the GitHub releases', () => {
-    expect(updateSourceUrl('ios', 'https://github.com/bulwarkmail/native/releases/tag/0.1.77')).toBe(IOS_TESTFLIGHT_URL);
-    expect(updateSourceUrl('android', 'https://github.com/bulwarkmail/native/releases/tag/0.1.77'))
-      .toBe('https://github.com/bulwarkmail/native/releases/tag/0.1.77');
+    expect(updateSourceUrl('ios', 'https://github.com/xenaxiocom/native/releases/tag/0.1.77')).toBe(IOS_TESTFLIGHT_URL);
+    expect(updateSourceUrl('android', 'https://github.com/xenaxiocom/native/releases/tag/0.1.77'))
+      .toBe('https://github.com/xenaxiocom/native/releases/tag/0.1.77');
     expect(updateSourceUrl('android', null)).toBe(`${NATIVE_REPO_URL}/releases`);
   });
 });

@@ -14,8 +14,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 
-const SHARED = 'TEAM.org.bulwarkmail.shared';
-const OWN = 'TEAM.org.bulwarkmail.mobile';
+const SHARED = 'TEAM.com.xenaxio.shared';
+const OWN = 'TEAM.com.xenaxio.app';
 const constants = { default: { expoConfig: { extra: { iosSharedKeychainGroup: SHARED, iosAppKeychainGroup: OWN } } } };
 
 vi.mock('react-native', () => ({ Platform: { OS: 'ios' } }));

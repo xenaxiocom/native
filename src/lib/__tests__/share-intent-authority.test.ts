@@ -6,8 +6,8 @@ import { describe, it, expect } from 'vitest';
 import { isForeignContentUri, shareAttachments } from '../share-intent';
 import { isComposeAttachmentUri } from '../email-export';
 
-const PKG = 'com.anonymous.bulwarkmobile';
-const PLAY_PKG = 'org.bulwarkmail.mobile';
+const PKG = 'com.xenaxio.pilot';
+const PLAY_PKG = 'com.xenaxio.app';
 const CACHE = `file:///data/user/0/${PKG}/cache/`;
 
 describe('the authority as Android resolves it', () => {

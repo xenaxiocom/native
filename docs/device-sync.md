@@ -1,6 +1,6 @@
 # Device sync: contacts and calendars in Android's providers
 
-Issue [#34](https://github.com/bulwarkmail/native/issues/34). Each signed-in
+Issue [#34](https://github.com/xenaxiocom/native/issues/34). Each signed-in
 account can opt in to device sync. Its address books then appear in Android's
 Contacts provider and its calendars in the Calendar provider, under an Android
 account of type "Bulwark". Google Contacts and Calendar, AOSP/Fossify Contacts,

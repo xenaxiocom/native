@@ -1,7 +1,11 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-apply plugin: "com.google.gms.google-services"
+// xenaxio: FCM needs our Firebase project's google-services.json (CI writes it from the
+// GOOGLE_SERVICES_JSON secret). Without it the app builds without FCM push.
+if (file("google-services.json").exists()) {
+    apply plugin: "com.google.gms.google-services"
+}
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
@@ -148,7 +152,7 @@ android {
 
     namespace 'com.anonymous.bulwarkmobile'
     defaultConfig {
-        applicationId 'com.anonymous.bulwarkmobile'
+        applicationId 'com.xenaxio.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode appVersionCode.toInteger()
@@ -172,12 +176,13 @@ android {
     productFlavors {
         github {
             dimension "distribution"
-            applicationId 'com.anonymous.bulwarkmobile'
+            // xenaxio: the pilot APK, beside the store app.
+            applicationId 'com.xenaxio.pilot'
             buildConfigField "String", "DISTRIBUTION", '"github"'
         }
         play {
             dimension "distribution"
-            applicationId 'org.bulwarkmail.mobile'
+            applicationId 'com.xenaxio.app'
             buildConfigField "String", "DISTRIBUTION", '"play"'
         }
     }

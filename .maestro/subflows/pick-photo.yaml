@@ -4,7 +4,7 @@
 # elements, but taps by position reach it. Such a tap can miss (a grid still
 # loading, or the check mark before a photo is picked, which leaves the
 # picker open), so pick once more if the composer hasn't come back.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 - extendedWaitUntil:
     notVisible:

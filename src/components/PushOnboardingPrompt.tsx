@@ -1,4 +1,5 @@
 import React from 'react';
+import { enableXenaxioPush, isXenaxioAccount } from '../xenaxio/push';
 import { View, Text, StyleSheet, Pressable, Animated, Easing, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFloatingCardFrame, useLayout } from '../lib/use-layout';
@@ -104,6 +105,13 @@ export function PushOnboardingPrompt(): React.ReactElement | null {
     setBusy(true);
     setError(null);
     try {
+      // xenaxio (step 151 B): a Xenaxio account's notifications come from the platform.
+      if (isXenaxioAccount(activeAccountId)) {
+        await enableXenaxioPush(activeAccountId);
+        await dismissPushPrompt(activeAccountId);
+        setVisible(false);
+        return;
+      }
       const relayBaseUrl = (await getEffectiveRelayBaseUrl()) || DEFAULT_RELAY_BASE_URL;
       await setStoredRelayBaseUrl(relayBaseUrl);
       await setupPushNotifications({ relayBaseUrl, accountLabel: username ?? undefined });

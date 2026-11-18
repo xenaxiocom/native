@@ -273,7 +273,9 @@ export async function migrateLegacyPushKeys(): Promise<void> {
 // Hosted relay so users don't need to run their own Firebase project. The
 // relay only ever sees FCM tokens + JMAP state-id hashes - no mail content.
 // Power users can override this from the settings screen.
-export const DEFAULT_RELAY_BASE_URL = 'https://notifications.relay.bulwarkmail.org';
+// xenaxio: push comes through the Xenaxio platform, never Bulwark's relay: no outside server
+// sees our people's devices (step 151 part B speaks the relay's protocol there).
+export const DEFAULT_RELAY_BASE_URL = 'https://app.xenaxio.com/api/mobile/push';
 
 /**
  * A relay must be reachable over TLS: the registration carries the FCM token

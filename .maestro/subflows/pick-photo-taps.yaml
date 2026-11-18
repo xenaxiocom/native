@@ -1,5 +1,5 @@
 # The taps of pick-photo.yaml: the first photo, then the check mark.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 - runFlow:
     when:

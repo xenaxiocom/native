@@ -128,6 +128,14 @@ jobs:
           echo "store_file=$KEYSTORE" >> "$GITHUB_OUTPUT"
           echo "cert_sha256=$CERT_SHA256" >> "$GITHUB_OUTPUT"
 
+      # xenaxio: FCM through our own Firebase project (never Bulwark's). Without the secret
+      # the app builds without FCM push.
+      - name: Write the Firebase configuration
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON" ]; then printf '%s' "$GOOGLE_SERVICES_JSON" > android/app/google-services.json; fi
+
       - name: Build release APK
         working-directory: android
         env:
@@ -249,14 +257,14 @@ jobs:
           set -euo pipefail
           VERSION=$(cat VERSION | tr -d '[:space:]')
           SRC=android/app/build/outputs/apk/github/release/app-github-release.apk
-          DEST="bulwark-mobile-${VERSION}-${GITHUB_SHA::7}.apk"
+          DEST="xenaxio-${VERSION}-${GITHUB_SHA::7}.apk"
           cp "$SRC" "$DEST"
           sha256sum "$DEST" > "$DEST.sha256"
 
           MAPPING_SRC=android/app/build/outputs/mapping/githubRelease/mapping.txt
           MAPPING=""
           if [ -f "$MAPPING_SRC" ]; then
-            MAPPING="bulwark-mobile-${VERSION}-${GITHUB_SHA::7}-mapping.txt"
+            MAPPING="xenaxio-${VERSION}-${GITHUB_SHA::7}-mapping.txt"
             cp "$MAPPING_SRC" "$MAPPING"
           elif grep -Eq '^android\.enableMinifyInReleaseBuilds=true\s*$' android/gradle.properties; then
             echo "::error title=R8 mapping missing::R8 is on but the build wrote no $MAPPING_SRC, so stack traces from this APK could not be decoded."
@@ -275,7 +283,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       # Ties the APK to this commit and workflow run, which the signing key
-      # alone does not: `gh attestation verify <apk> --repo bulwarkmail/native`.
+      # alone does not: `gh attestation verify <apk> --repo xenaxiocom/native`.
       - name: Attest build provenance
         uses: actions/attest@v4
         with:
@@ -392,6 +400,14 @@ jobs:
 
       # Play splits a bundle per ABI, so the extra architectures cost a phone
       # nothing and let 32-bit ARM phones and x86_64 Chromebooks install it.
+      # xenaxio: FCM through our own Firebase project (never Bulwark's). Without the secret
+      # the app builds without FCM push.
+      - name: Write the Firebase configuration
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON" ]; then printf '%s' "$GOOGLE_SERVICES_JSON" > android/app/google-services.json; fi
+
       - name: Build the Play bundle
         working-directory: android
         env:
@@ -419,8 +435,8 @@ jobs:
             exit 1
           fi
           MANIFEST=$(unzip -p "$AAB" base/manifest/AndroidManifest.xml | tr -c '[:print:]' '\n')
-          if ! grep -q 'org.bulwarkmail.mobile' <<< "$MANIFEST"; then
-            echo "::error title=Wrong package::The bundle is not org.bulwarkmail.mobile."
+          if ! grep -q 'com.xenaxio.app' <<< "$MANIFEST"; then
+            echo "::error title=Wrong package::The bundle is not com.xenaxio.app."
             exit 1
           fi
           for permission in REQUEST_INSTALL_PACKAGES READ_MEDIA_IMAGES READ_MEDIA_VIDEO RECORD_AUDIO; do
@@ -435,8 +451,8 @@ jobs:
         run: |
           set -euo pipefail
           VERSION=$(cat VERSION | tr -d '[:space:]')
-          AAB="bulwark-mobile-play-${VERSION}-${GITHUB_SHA::7}.aab"
-          MAPPING="bulwark-mobile-play-${VERSION}-${GITHUB_SHA::7}-mapping.txt"
+          AAB="xenaxio-play-${VERSION}-${GITHUB_SHA::7}.aab"
+          MAPPING="xenaxio-play-${VERSION}-${GITHUB_SHA::7}-mapping.txt"
           cp android/app/build/outputs/bundle/playRelease/app-play-release.aab "$AAB"
           cp android/app/build/outputs/mapping/playRelease/mapping.txt "$MAPPING"
           echo "aab=$AAB" >> "$GITHUB_OUTPUT"
@@ -460,7 +476,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
-          packageName: org.bulwarkmail.mobile
+          packageName: com.xenaxio.app
           releaseFiles: ${{ steps.artifact.outputs.aab }}
           mappingFile: ${{ steps.artifact.outputs.mapping }}
           releaseName: ${{ steps.artifact.outputs.version }}

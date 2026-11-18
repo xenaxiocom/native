@@ -114,11 +114,11 @@ function signedRelease(secrets: Record<string, string>) {
 }
 
 const BASE_SECRETS = {
-  IOS_PROVISIONING_PROFILE_BASE64: fakeProfile('app-uuid', 'Bulwark Mobile App Store', 'org.bulwarkmail.mobile'),
-  IOS_NSE_PROVISIONING_PROFILE_BASE64: fakeProfile('nse-uuid', 'Bulwark NSE App Store', 'org.bulwarkmail.mobile.NotificationService'),
+  IOS_PROVISIONING_PROFILE_BASE64: fakeProfile('app-uuid', 'Bulwark Mobile App Store', 'com.xenaxio.app'),
+  IOS_NSE_PROVISIONING_PROFILE_BASE64: fakeProfile('nse-uuid', 'Bulwark NSE App Store', 'com.xenaxio.app.NotificationService'),
 };
 const WIDGET_SECRET = {
-  IOS_WIDGET_PROVISIONING_PROFILE_BASE64: fakeProfile('widget-uuid', 'Bulwark Widget App Store', 'org.bulwarkmail.mobile.Widget'),
+  IOS_WIDGET_PROVISIONING_PROFILE_BASE64: fakeProfile('widget-uuid', 'Bulwark Widget App Store', 'com.xenaxio.app.Widget'),
 };
 
 describe.skipIf(!haveBash)('signed iOS release and the widget profile', () => {
@@ -127,8 +127,8 @@ describe.skipIf(!haveBash)('signed iOS release and the widget profile', () => {
     expect(r.installed).toEqual(['app-uuid.mobileprovision', 'nse-uuid.mobileprovision']);
     expect(r.outputs.widget_uuid).toBeUndefined();
     expect(r.prebuildEnv).toMatchObject({ IOS_APP_PROFILE: 'app-uuid', IOS_NSE_PROFILE: 'nse-uuid', IOS_WIDGET_PROFILE: '' });
-    expect(r.exportOptions).toContain('<key>org.bulwarkmail.mobile</key><string>Bulwark Mobile App Store</string>');
-    expect(r.exportOptions).toContain('<key>org.bulwarkmail.mobile.NotificationService</key><string>Bulwark NSE App Store</string>');
+    expect(r.exportOptions).toContain('<key>com.xenaxio.app</key><string>Bulwark Mobile App Store</string>');
+    expect(r.exportOptions).toContain('<key>com.xenaxio.app.NotificationService</key><string>Bulwark NSE App Store</string>');
     expect(r.exportOptions).not.toContain('Widget');
     expect(r.log).not.toContain('widget:');
   });
@@ -136,11 +136,11 @@ describe.skipIf(!haveBash)('signed iOS release and the widget profile', () => {
   it('installs the widget profile, hands it to prebuild and exports with it when the secret is set', () => {
     const r = signedRelease({ ...BASE_SECRETS, ...WIDGET_SECRET });
     expect(r.installed).toEqual(['app-uuid.mobileprovision', 'nse-uuid.mobileprovision', 'widget-uuid.mobileprovision']);
-    expect(r.outputs).toMatchObject({ widget_uuid: 'widget-uuid', widget_bundle_id: 'org.bulwarkmail.mobile.Widget' });
+    expect(r.outputs).toMatchObject({ widget_uuid: 'widget-uuid', widget_bundle_id: 'com.xenaxio.app.Widget' });
     expect(r.prebuildEnv).toMatchObject({ IOS_APP_PROFILE: 'app-uuid', IOS_NSE_PROFILE: 'nse-uuid', IOS_WIDGET_PROFILE: 'widget-uuid' });
     const dict = /<key>provisioningProfiles<\/key>\s*<dict>([\s\S]*?)<\/dict>/.exec(r.exportOptions)?.[1] ?? '';
-    expect(dict).toContain('<key>org.bulwarkmail.mobile.Widget</key><string>Bulwark Widget App Store</string>');
-    expect(dict).toContain('<key>org.bulwarkmail.mobile</key><string>Bulwark Mobile App Store</string>');
+    expect(dict).toContain('<key>com.xenaxio.app.Widget</key><string>Bulwark Widget App Store</string>');
+    expect(dict).toContain('<key>com.xenaxio.app</key><string>Bulwark Mobile App Store</string>');
   });
 });
 
@@ -153,7 +153,7 @@ describe('plugins/ios-widget in a signed build', () => {
     }
     vi.restoreAllMocks();
   });
-  const config = () => ({ name: 'Bulwark', slug: 'bulwark', ios: { bundleIdentifier: 'org.bulwarkmail.mobile' } });
+  const config = () => ({ name: 'Bulwark', slug: 'bulwark', ios: { bundleIdentifier: 'com.xenaxio.app' } });
 
   it('leaves the widget out when prebuild gets an empty IOS_WIDGET_PROFILE', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);

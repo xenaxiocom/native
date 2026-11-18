@@ -8,6 +8,7 @@ import { I18nManager } from 'react-native';
 import { getLocales } from 'expo-localization';
 import { formatMessage, type MessageParams } from './format';
 import { setDeviceLocales } from '../lib/intl-locale';
+import { rebrandMessages } from '../xenaxio/brand';
 
 // English is the fallback for every lookup, so it is loaded eagerly. The other
 // catalogs are loaded on first use; see CATALOG_LOADERS below.
@@ -181,14 +182,15 @@ const plainDictionaries: Partial<Record<LocaleCode, Dictionary>> = {};
 export function getDictionary(locale: LocaleCode, plain = false): Dictionary {
   let dict = dictionaries[locale];
   if (!dict) {
-    dict = deepMerge(CATALOG_LOADERS[locale](), OVERLAY_LOADERS[locale]());
+    // xenaxio: our product name in Bulwark's strings (src/xenaxio/brand.ts).
+    dict = rebrandMessages(deepMerge(CATALOG_LOADERS[locale](), OVERLAY_LOADERS[locale]()));
     dictionaries[locale] = dict;
   }
   const loadPlain = plain ? PLAIN_LOADERS[locale] : undefined;
   if (!loadPlain) return dict;
   let plainDict = plainDictionaries[locale];
   if (!plainDict) {
-    plainDict = deepMerge(dict, loadPlain());
+    plainDict = rebrandMessages(deepMerge(dict, loadPlain()));
     plainDictionaries[locale] = plainDict;
   }
   return plainDict;

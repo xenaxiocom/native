@@ -51,7 +51,7 @@ vi.mock('expo-file-system', () => {
       this.parent = dir;
       this.name = name;
       this.uri = `${dir.uri}${name}`;
-      this.contentUri = `content://org.bulwarkmail.mobile.FileSystemFileProvider/${name}`;
+      this.contentUri = `content://com.xenaxio.app.FileSystemFileProvider/${name}`;
     }
     get parentDirectory() { return this.parent; }
     create() {}

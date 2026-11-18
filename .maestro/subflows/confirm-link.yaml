@@ -1,5 +1,5 @@
 # A sign-in link from another app asks first. Continue.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 ---
 # simctl openurl acts like a link from another app: iOS asks first.
 - extendedWaitUntil:

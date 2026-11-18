@@ -1,5 +1,5 @@
 # Second account via the webmail hand-off, on top of a password account.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Add account, webmail
 tags:
   - signin

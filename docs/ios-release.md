@@ -65,7 +65,7 @@ The key authenticates the TestFlight upload.
 These live on two different Apple sites and have to be done in this order.
 
 **developer.apple.com** → Certificates, Identifiers & Profiles → Identifiers →
-**+** → App IDs → App. Explicit bundle ID `org.bulwarkmail.mobile`, matching
+**+** → App IDs → App. Explicit bundle ID `com.xenaxio.app`, matching
 `ios.bundleIdentifier` in [app.config.js](../app.config.js). Turn on **Push
 Notifications** (plugins/ios-push gives the app the `aps-environment`
 entitlement) and leave the rest off: sign-in uses the custom `bulwarkmobile://`
@@ -100,13 +100,13 @@ update the secret when that happens.
 
 Each app extension is its own App ID and needs its own App Store profile. The
 app and its extensions share data through the keychain group
-`<Team ID>.org.bulwarkmail.shared`, which every profile of the team allows, so
+`<Team ID>.com.xenaxio.shared`, which every profile of the team allows, so
 no App Group and no other capability is needed.
 
 | Extension | App ID (explicit) | Secret | Without it |
 | --- | --- | --- | --- |
-| Notification service (plugins/ios-push) | `org.bulwarkmail.mobile.NotificationService` | `IOS_NSE_PROVISIONING_PROFILE_BASE64` | the signed build stops with an error |
-| Inbox widget (plugins/ios-widget) | `org.bulwarkmail.mobile.Widget` | `IOS_WIDGET_PROVISIONING_PROFILE_BASE64` | the release is built without the widget |
+| Notification service (plugins/ios-push) | `com.xenaxio.app.NotificationService` | `IOS_NSE_PROVISIONING_PROFILE_BASE64` | the signed build stops with an error |
+| Inbox widget (plugins/ios-widget) | `com.xenaxio.app.Widget` | `IOS_WIDGET_PROVISIONING_PROFILE_BASE64` | the release is built without the widget |
 
 For each: developer.apple.com → Identifiers → **+** → App IDs → App, the bundle
 ID from the table, every capability off. Then Profiles → **+** → Distribution →

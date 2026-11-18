@@ -8,6 +8,7 @@ import { getAccountInitials } from '../../lib/avatar-utils';
 import { accountRowText, serverHostLabel } from '../../lib/account-utils';
 import { accountServerLine } from '../../lib/account-labels';
 import OptionTile from './OptionTile';
+import { PRODUCT_NAME } from '../../xenaxio/brand';
 import LoginNotice from './LoginNotice';
 import { useLocaleStore } from '../../stores/locale-store';
 
@@ -30,6 +31,8 @@ interface ChooseStepProps {
   onUseEmail: () => void;
   onUseKnownServer: (serverUrl: string) => void;
   onManualSetup: () => void;
+  /** xenaxio (step 151 A): sign in through the Xenaxio platform. Shown first when given. */
+  onXenaxio?: () => void;
   notice?: { title: string; detail?: string } | null;
   disabled?: boolean;
 }
@@ -51,6 +54,7 @@ export default function ChooseStep({
   onUseEmail,
   onUseKnownServer,
   onManualSetup,
+  onXenaxio,
   notice,
   disabled = false,
 }: ChooseStepProps) {
@@ -86,7 +90,7 @@ export default function ChooseStep({
             style={styles.logo}
             resizeMode="contain"
           />
-          <Text style={styles.title}>Bulwark Mail</Text>
+          <Text style={styles.title}>{PRODUCT_NAME}</Text>
           <Text style={styles.subtitle}>{t('login.mobile.choose_subtitle', "Choose how you'd like to sign in.")}</Text>
         </View>
       )}
@@ -123,6 +127,16 @@ export default function ChooseStep({
             );
           })}
         </View>
+      ) : null}
+
+      {onXenaxio ? (
+        <OptionTile
+          title={t('login.xenaxio.title', 'Sign in with Xenaxio')}
+          description={t('login.xenaxio.desc', 'With your company email, as on the web')}
+          renderIcon={(color, size) => <Mail size={size} color={color} />}
+          onPress={onXenaxio}
+          disabled={disabled}
+        />
       ) : null}
 
       {notice ? (

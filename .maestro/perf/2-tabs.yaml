@@ -1,5 +1,5 @@
 # Perf: switch through the tabs, three times.
-appId: org.bulwarkmail.mobile
+appId: com.xenaxio.app
 name: Perf tab switches
 ---
 - repeat:
