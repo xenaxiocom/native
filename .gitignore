@@ -63,3 +63,6 @@ yarn-error.*
 /android/build-release.log
 /android/expo*.log
 /android/metro.log
+
+# xenaxio: our Firebase project, written by CI from the GOOGLE_SERVICES_JSON secret.
+android/app/google-services.json
